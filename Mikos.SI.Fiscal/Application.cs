@@ -740,7 +740,7 @@ namespace Mikos.SI.Fiscal
                     Attribute = (TextAttribute)0,
                     Alignment = (TextAlignment)2,
                     Size = (TextSize)0,
-                    TextList = new ArrayList { ReceiptPrintUtil.addNumber(fiscalData.SpecialId, this.OpsContext) }
+                    TextList = new ArrayList { ReceiptPrintUtil.addNumber(fiscalData.SpecialId, cisConfiguration.BusinessPremiseId, this.OpsContext) }
                 };
 
                 if (buyerInfo != null)

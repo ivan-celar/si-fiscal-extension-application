@@ -164,11 +164,11 @@ namespace Mikos.SI.Fiscal.Util
             return inputString.PadLeft((40 - length) / 2 + length).PadRight(40);
         }
 
-        public static string addNumber(string SPECIALID, OpsContext opsContext)
+        public static string addNumber(string SPECIALID, string businessPremiseid, OpsContext opsContext)
         {
             StringBuilder sb = new StringBuilder();
 
-            return CenterString(sb.Append(opsContext.RvcNumber).Append("-").Append(opsContext.WorkstationNumber).Append("-").Append(SPECIALID).ToString());
+            return CenterString(sb.Append(businessPremiseid).Append("-").Append(opsContext.WorkstationNumber).Append("-").Append(SPECIALID).ToString());
         }
 
         public static string FormatVoidCheckItem(VoidCheckItem item)
