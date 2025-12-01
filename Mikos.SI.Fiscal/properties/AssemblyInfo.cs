@@ -3,8 +3,8 @@ using System.Reflection;
 
 [assembly: AssemblyTitle("Mikos.SI.Fiscal")]
 [assembly: AssemblyCompany("Mikos d.o.o")]
-[assembly: AssemblyProduct("Mikos.SI.Fiscal 18.2.9")]
-[assembly: AssemblyCopyright("Copyright ©  2024")]
+[assembly: AssemblyProduct("Mikos.SI.Fiscal 19.5.4")]
+[assembly: AssemblyCopyright("Copyright ©  2025")]
 [assembly: AssemblyVersion("1.0.0.4")]
 [assembly: AssemblyFileVersion("1.0.0.4")]
 [assembly: Guid("14cf3044-3e53-4ccd-afee-e758c51941e9")]

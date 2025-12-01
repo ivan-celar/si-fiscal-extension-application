@@ -44,13 +44,13 @@
       <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Ops">
-      <HintPath>..\..\..\..\Micros\Simphony\WebServer\wwwroot\EGateway\Handlers\Ops.dll</HintPath>
+      <HintPath>..\..\..\Micros\Simphony\WebServer\wwwroot\EGateway\Handlers\ExtensionApplications\Mikos.MK.Fiscal\Ops.dll</HintPath>
     </Reference>
     <Reference Include="PosCommonClasses">
-      <HintPath>..\..\..\..\Micros\Simphony\WebServer\wwwroot\EGateway\Handlers\PosCommonClasses.dll</HintPath>
+      <HintPath>..\..\..\Micros\Simphony\WebServer\wwwroot\EGateway\Handlers\ExtensionApplications\Mikos.MK.Fiscal\PosCommonClasses.dll</HintPath>
     </Reference>
     <Reference Include="PosCore">
-      <HintPath>..\..\..\..\Micros\Simphony\WebServer\wwwroot\EGateway\Handlers\PosCore.dll</HintPath>
+      <HintPath>..\..\..\Micros\Simphony\WebServer\wwwroot\EGateway\Handlers\ExtensionApplications\Mikos.MK.Fiscal\PosCore.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
