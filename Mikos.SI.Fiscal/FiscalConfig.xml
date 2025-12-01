@@ -1,0 +1,80 @@
+<configuration>
+    <parameters>
+        <timeout>15</timeout>
+        <debug>true</debug>
+        <logLevel>Debug</logLevel>
+        <supportingdocumentsprocessing>true</supportingdocumentsprocessing>
+        <propertycode>DBVZR</propertycode>
+        <kunaobjectnumber>31</kunaobjectnumber>
+        <euroobjectnumber>32</euroobjectnumber>
+        <totalineuro>1</totalineuro>
+    </parameters>
+    <global>
+        <useobjectnumbers>true</useobjectnumbers>
+        <usepayrollid>true</usepayrollid>
+        <debug>true</debug>
+        <transactiontype>pid</transactiontype>
+    </global>
+    <cis>
+        <OIB>97085726935</OIB>
+        <TerminalId>HRV_01</TerminalId>
+        <BusinessPremiseId1>BPI1-234-HIJ</BusinessPremiseId1>
+        <BusinessPremiseId2>BPI2-ABC-456</BusinessPremiseId2>
+        <EmployeeNumber>29002970659</EmployeeNumber>
+        <SellerName>MIKOS</SellerName>
+        <SellerOwner>Mikos</SellerOwner>
+        <SellerAddr>TEST</SellerAddr>
+        <SellerCity>Zagreb</SellerCity>
+        <SellerCountry>Croatia</SellerCountry>
+    </cis>
+    <service>
+        <url>https://dev-app.hobaca.com/racunko/api/v1/opera/invoices/fiscalize</url>
+    </service>
+    <payments>
+        <payment>
+            <type>G</type>
+            <description>Cash</description>
+            <objectNumber>9001</objectNumber>
+        </payment>
+        <payment>
+            <type>K</type>
+            <description>American Express</description>
+            <objectNumber>9002</objectNumber>
+        </payment>
+        <payment>
+            <type>K</type>
+            <description>Visa</description>
+            <objectNumber>9003</objectNumber>
+        </payment>
+        <payment>
+            <type>K</type>
+            <description>MasterCard</description>
+            <objectNumber>9004</objectNumber>
+        </payment>
+        <payment>
+            <type>K</type>
+            <description>Diners Club</description>
+            <objectNumber>9005</objectNumber>
+        </payment>
+        <payment>
+            <type>K</type>
+            <description>Maestro</description>
+            <objectNumber>9006</objectNumber>
+        </payment>
+        <payment>
+            <type>K</type>
+            <description>JCB</description>
+            <objectNumber>9007</objectNumber>
+        </payment>
+        <payment>
+            <type>P</type>
+            <description>Room Charge</description>
+            <objectNumber>7001</objectNumber>
+        </payment>
+        <!-- <payment> -->
+            <!-- <type>D</type> -->
+            <!-- <description>Depozit</description> -->
+            <!-- <objectNumber>1</objectNumber> -->
+        <!-- </payment> -->
+    </payments>
+</configuration>
