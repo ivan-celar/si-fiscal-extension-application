@@ -1183,7 +1183,7 @@ namespace Mikos.SI.Fiscal
             {
                 IList<OpsSelectionEntry> list = (from fr in fiscalContext.BuyerInfos.Where((BuyerInfo m) => m.active).ToList()
                                                  select new OpsSelectionEntry(fr.Id, $"{fr.vatId} | {fr.name}")).ToList();
-                int? num = base.OpsContext.SelectionRequest("Previous buyers", "Select a buyer:", list);
+                int? num = base.OpsContext.SearchRequest("Previous buyers", "Select a buyer:", list);
 
                 if (!num.HasValue)
                 {
