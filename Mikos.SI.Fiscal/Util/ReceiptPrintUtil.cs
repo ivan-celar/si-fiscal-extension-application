@@ -168,7 +168,9 @@ namespace Mikos.SI.Fiscal.Util
         {
             StringBuilder sb = new StringBuilder();
 
-            return CenterString(sb.Append(businessPremiseid).Append("-").Append(opsContext.WorkstationNumber).Append("-").Append(SPECIALID).ToString());
+            string invoiceNumber = !"0".Equals(SPECIALID) ? sb.Append(businessPremiseid).Append("-").Append(opsContext.WorkstationNumber).Append("-").Append(SPECIALID).ToString() : "";
+
+            return CenterString(invoiceNumber);
         }
 
         public static string FormatVoidCheckItem(VoidCheckItem item)
