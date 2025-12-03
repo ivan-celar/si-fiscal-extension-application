@@ -429,7 +429,7 @@ namespace Mikos.SI.Fiscal
                 ExchangeRates = { },
                 PropertyDateTime = currentDateTimeFormat,
                 BusinessPremiseId1 = OpsContext.RvcNumber.ToString(),
-                BusinessPremiseId2 = OpsContext.RvcNumber.ToString()
+                BusinessPremiseId2 = OpsContext.WorkstationNumber.ToString()
             };
             invoice.ReservationInfo = new ReservationInfo()
             {
