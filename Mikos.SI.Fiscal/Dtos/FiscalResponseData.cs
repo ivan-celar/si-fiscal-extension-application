@@ -9,7 +9,7 @@ namespace Mikos.SI.Fiscal.Dtos
     // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
     public class FiscalResponseData
     {
-        public long FiscalFolioNo { get; set; }
+        public string FiscalFolioNo { get; set; }
         public FiscalOutputs FiscalOutputs { get; set; }
         public StatusMessages StatusMessages { get; set; }
     }

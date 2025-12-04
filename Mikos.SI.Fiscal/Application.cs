@@ -217,7 +217,7 @@ namespace Mikos.SI.Fiscal
                 verifyInvoiceValue = result?.FiscalOutputs?.Output?.Find(qRCodeBase => qRCodeBase.Name == "VERIFY_INVOICE")?.Value;
                 doc1Value = result?.FiscalOutputs?.Output?.Find(qRCodeBase => qRCodeBase.Name == "DOCUMENT_NO_1")?.Value;
                 doc2Value = result?.FiscalOutputs?.Output?.Find(qRCodeBase => qRCodeBase.Name == "DOCUMENT_NO_2")?.Value;
-                specialIdValue = result?.FiscalFolioNo.ToString();
+                specialIdValue = result?.FiscalFolioNo;
             } 
             else if (fiscalize)
             {
