@@ -103,7 +103,6 @@ namespace Mikos.SI.Fiscal
         {
             //Add initialization code and hook up event handlers here
             base.OpsFinalTenderEvent += Application_FinalTenderEvent;
-            base.OpsSvcTotalEvent += Application_SvcTotalEvent;
             base.OpsVoidClosedCheckEventPreview += Application_VoidClosedCheckEventPreview;
             base.OpsCustomReceiptEvent += Application_CustomReceiptEvent;
             this.OpsVoidReasonEvent += Application_VoidReasonEvent;
@@ -130,34 +129,6 @@ namespace Mikos.SI.Fiscal
 
                     }
 
-                    ProcessResult(result, false);
-                }
-            }
-            catch (Exception ex)
-            {
-                this.OpsContext.ShowMessage(ex.Message);
-                return EventProcessingInstruction.Continue;
-            }
-            return EventProcessingInstruction.Continue;
-        }
-
-        private EventProcessingInstruction Application_SvcTotalEvent(object sender, OpsTmedEventArgs args)
-        {
-            try
-            {
-                if (!this.OpsContext.TrainingModeEnabled)
-                {
-                    FiscalResponseData result = null;
-                    FiscalRequestData supportingDocument = FillFiscalRequestInitData(false);
-                    fiscalData = null;
-                    VoidCheckItems = null;
-
-                    if (supportingDocument != null)
-                    {
-
-                        result = System.Threading.Tasks.Task.Run(async () => await sendRequestToRacunko(supportingDocument)).Result;
-                        
-                    }
                     ProcessResult(result, false);
                 }
             }
@@ -1205,7 +1176,6 @@ namespace Mikos.SI.Fiscal
         {
             base.OpsFinalTenderEvent -= Application_FinalTenderEvent;
             base.OpsCustomReceiptEvent -= Application_CustomReceiptEvent;
-            base.OpsSvcTotalEvent -= Application_SvcTotalEvent;
             base.OpsVoidClosedCheckEventPreview -= Application_VoidClosedCheckEventPreview;
             base.OpsVoidReasonEvent -= Application_VoidReasonEvent;
             this.Destroy();
