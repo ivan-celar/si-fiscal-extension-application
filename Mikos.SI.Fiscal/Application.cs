@@ -730,10 +730,6 @@ namespace Mikos.SI.Fiscal
                     header.TextList.AddRange(ReceiptPrintUtil.AddBuyerInfoHeader(buyerInfo));
                 }
 
-                byte[] cmd = new byte[] { 0x1B, 0x70, 0x00, 0x40, 0x50 }; //command to open cash drawer
-
-                header.TextList.Add(cmd);
-
                 args.CustomHeader = header.TextList;
             }
 
