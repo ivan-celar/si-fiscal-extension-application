@@ -1,5 +1,6 @@
 ﻿using Micros.Ops;
 using Micros.Ops.Extensibility;
+using Micros.Ops.IntegratedCashManagement;
 using Micros.PosCore.Checks;
 using Micros.PosCore.Common;
 using Micros.PosCore.Common.Classes;
@@ -7,6 +8,7 @@ using Micros.PosCore.Extensibility;
 using Micros.PosCore.Extensibility.DataStore.DbRecords;
 using Micros.PosCore.Extensibility.Ops;
 using Micros.PosCore.Extensibility.Printing;
+using Mikos.SI.Fiscal.Datastore.Configuration;
 using Mikos.SI.Fiscal.Datastore.Dao;
 using Mikos.SI.Fiscal.Datastore.Mapper;
 using Mikos.SI.Fiscal.Datastore.Repository;
@@ -83,9 +85,11 @@ namespace Mikos.SI.Fiscal
         }
 
         public PosPrinterDirective posPrinterDirective { get; set; }
-
+        private CashDrawerSettings cashDrawerSettings = new CashDrawerSettings()
+        {
+            Enabled = false
+        };
         private VoidCheckItems VoidCheckItems;
-
         private FiscalData fiscalData;
         private FiscalDataService fiscalDataService;
         private BuyerInfo buyerInfo;
@@ -94,6 +98,7 @@ namespace Mikos.SI.Fiscal
         private bool cancelVoid;
         private bool fiscalize = true;
         private bool hasBuyer = false;
+        private bool openCashDrawer = false;
         /// <summary>
         /// Extension application constructor
         /// </summary>
@@ -107,7 +112,7 @@ namespace Mikos.SI.Fiscal
             base.OpsCustomReceiptEvent += Application_CustomReceiptEvent;
             this.OpsVoidReasonEvent += Application_VoidReasonEvent;
             this.fiscalDataService = new FiscalDataService();
-
+            this.cashDrawerSettings = ReadOpenCashDrawerSetting();
         }
 
         private EventProcessingInstruction Application_FinalTenderEvent(object sender, OpsTmedEventArgs args)
@@ -518,6 +523,11 @@ namespace Mikos.SI.Fiscal
                     {
                         fiscalize = false;
                     }
+                    else if (selectedPaymentMethod == "G")
+                    {
+                        openCashDrawer = true;
+                    }
+
                     paymentMethod = string.Copy(selectedPaymentMethod);
 
                     revenueBucketItem = new RevenueBucketInfo()
@@ -720,6 +730,9 @@ namespace Mikos.SI.Fiscal
                     header.TextList.AddRange(ReceiptPrintUtil.AddBuyerInfoHeader(buyerInfo));
                 }
 
+                byte[] cmd = new byte[] { 0x1B, 0x70, 0x00, 0x40, 0x50 }; //command to open cash drawer
+
+                header.TextList.Add(cmd);
 
                 args.CustomHeader = header.TextList;
             }
@@ -779,6 +792,15 @@ namespace Mikos.SI.Fiscal
             }
 
             args.CustomTrailer = val.TextList;
+
+            if (openCashDrawer)
+            {
+                openCashDrawer = false;
+                if (cashDrawerSettings.Enabled)
+                {
+                    val.TextList.Add(cashDrawerSettings.Command);
+                }
+            }
 
             return EventProcessingInstruction.Continue;
         }
@@ -1016,6 +1038,47 @@ namespace Mikos.SI.Fiscal
             catch (Exception ex)
             { 
                 return "";
+            }
+        }
+
+        private CashDrawerSettings ReadOpenCashDrawerSetting()
+        {
+            try
+            {
+                IEnumerable<XElement> enumerable = from item in XDocument.Parse(base.DataStore.ReadExtensionApplicationContentTextByNameKey(base.OpsContext.RvcID, ApplicationName, "FiscalConfig")).Descendants("global")
+                                                   select (item);
+                CashDrawerSettings result = new CashDrawerSettings()
+                {
+                    Enabled = false
+                };
+                foreach (XElement item in enumerable)
+                {
+                    bool enabled = false;
+                    if (bool.TryParse(item?.Element("opencashdrawer")?.Value, out enabled))
+                    {
+                        result.Enabled = enabled;
+                    }
+                }
+
+                if (result.Enabled)
+                {
+                    foreach (XElement item in enumerable)
+                    {
+                        string b64Command = item?.Element("command")?.Value;
+                        if (!string.IsNullOrWhiteSpace(b64Command))
+                        {
+                            result.Command = Convert.FromBase64String(b64Command);
+                        }
+                    } 
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return new CashDrawerSettings()
+                {
+                    Enabled = false
+                };
             }
         }
 

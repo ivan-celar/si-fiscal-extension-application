@@ -83,6 +83,7 @@
     <Compile Include="LocalFiscalReceipts.cs" />
     <Compile Include="Model\BuyerInfoEntryBoxData.cs" />
     <Compile Include="Model\BuyerInfoInput.cs" />
+    <Compile Include="Model\CashDrawerSettings.cs" />
     <Compile Include="Model\FiscalData.cs" />
     <Compile Include="Model\VoidCheckItems.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
